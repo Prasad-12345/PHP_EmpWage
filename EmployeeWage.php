@@ -3,19 +3,24 @@
     echo "Welcome to Employee Wage Computation Program \n";
 
     //Variables
-    $isEmpPresent = 1;
-    $num = rand(0,1); //Generating random numbers 1 and 2
+    $num = rand(0,2); //Generating random numbers 0 and 2
     $wagePerHour = 20;
     $empHours;
     
-    //Condition to check employee is present or not
-    if($num == $isEmpPresent){
-        //echo "Employee is Present \n";
-        $empHours = 8;
-    }
-    else{
-        echo "Employee is Absent \n";
-        $empHours = 0;
+    //Condition to get empHours i.e part time, full time or absent
+    switch($num){
+        case 1:
+            $empHours = 8;
+            break;
+
+        case 2:
+            $empHours = 4;
+            break;
+
+        default:
+            echo "Employee is absent \n";
+            $empHours = 0;
+            break;
     }
 
     //Calculate Daily Employee Wage
