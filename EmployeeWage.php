@@ -3,27 +3,35 @@
     echo "Welcome to Employee Wage Computation Program \n";
 
     //Variables
-    $num = rand(0,2); //Generating random numbers 0 and 2
     $wagePerHour = 20;
     $empHours;
-    
-    //Condition to get empHours i.e part time, full time or absent
-    switch($num){
-        case 1:
-            $empHours = 8;
-            break;
+    $workingDaysPerMonth = 20;
+    $numOfWorkingDays = 1;
+    $monthlyEmpWage = 0;
 
-        case 2:
-            $empHours = 4;
-            break;
+    //To calculate wage for a month
+    while($numOfWorkingDays <= $workingDaysPerMonth){
+        $num = rand(0,2); //Generating random numbers 0 and 2
+        //Condition to get empHours i.e part time, full time or absent
+        switch($num){
+            case 1:
+                $empHours = 8;
+                break;
 
-        default:
-            echo "Employee is absent \n";
-            $empHours = 0;
-            break;
+            case 2:
+                $empHours = 4;
+                break;
+
+            default:
+                echo "Employee is absent \n";
+                $empHours = 0;
+                break;
+        }
+        $numOfWorkingDays++;
+        //Calculate Daily Employee Wage
+        $dailyEmpWage = $wagePerHour * $empHours;
+        $monthlyEmpWage +=$dailyEmpWage;
     }
-
-    //Calculate Daily Employee Wage
-    $dailyEmpWage = $wagePerHour * $empHours;
-    echo "Employee Daily Wage :" . $dailyEmpWage;
+   
+    echo "Monthly Employee Wage :" . $monthlyEmpWage;
 ?>
