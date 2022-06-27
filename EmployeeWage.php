@@ -1,16 +1,16 @@
 <?php
     //Welcome message
     echo "Welcome to Employee Wage Computation Program \n";
+
     //Variables
     $isEmpPresent = 1;
-    $isEmpAbsent = 2;
-    $check = rand(1,2); //Generating random numbers 1 and 2
+    $num = rand(0,1); //Generating random numbers 1 and 2
     
     //Condition to check employee is present or not
-    if($check == $isEmpPresent){
-        echo "Employee is Present";
+    if($num == $isEmpPresent){
+        echo "Employee is Present \n";
     }
     else{
-        echo "Employee is Absent";
+        echo "Employee is Absent \n";
     }
 ?>
