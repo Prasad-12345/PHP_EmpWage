@@ -7,12 +7,12 @@
     $empHours;
     $workingDaysPerMonth = 20;
     $numOfWorkingDays = 1;
-    $totalWorkingHours = 100;
+    $maxWorkingHours = 100;
     $totalEmpHours = 0;
     $monthlyEmpWage = 0;
 
     //To calculate wage for a month
-    while($numOfWorkingDays <= $workingDaysPerMonth && $empHours <= $totalWorkingHours){
+    while($numOfWorkingDays <= $workingDaysPerMonth && $totalEmpHours <= $maxWorkingHours){
         $num = rand(0,2); //Generating random numbers 0 and 2
         //Condition to get empHours i.e part time, full time or absent
         switch($num){
