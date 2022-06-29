@@ -1,17 +1,18 @@
 <?php
+/*
+*Compute Employee wage for multiole companies
+*Use function parematers instead of class variables
+*/
     class EmployeeWage{
         //Variables
-        public $wagePerHour = 20;
         public $empHours;
-        public $workingDaysPerMonth = 20;
-        public $numOfWorkingDays = 0;
-        public $maxWorkingHours = 100;
-        public $totalEmpHours = 0;
-        public $monthlyEmpWage = 0;
 
         //To calculate wage for a month
-        public function calculateMonthlyWage(){
-            while($this->numOfWorkingDays <= $this->workingDaysPerMonth && $this->totalEmpHours <= $this->maxWorkingHours){
+        public function calculateMonthlyWage($company, $wagePerHour, $workingDaysPerMonth, $maxWorkingHours){
+            $monthlyEmpWage = 0;
+            $numOfWorkingDays = 0;
+            $totalEmpHours = 0;
+            while($numOfWorkingDays <= $workingDaysPerMonth && $totalEmpHours <= $maxWorkingHours){
                 $num = rand(0,2); //Generating random numbers 0 and 2
                 //Condition to get empHours i.e part time, full time or absent
                 switch($num){
@@ -24,22 +25,23 @@
                         break;
 
                     default:
-                        echo "Employee is absent \n";
+                        //echo "Employee is absent \n";
                         $this->empHours = 0;
                         break;
                 }
-                $this->numOfWorkingDays++;
-                $this->totalEmpHours += $this->empHours;
+                $numOfWorkingDays++;
+                $totalEmpHours += $this->empHours;
                 //Calculate Daily Employee Wage
-                $dailyEmpWage = $this->wagePerHour * $this->empHours;
-                $this->monthlyEmpWage +=$dailyEmpWage;
+                $dailyEmpWage = $wagePerHour * $this->empHours;
+                $monthlyEmpWage +=$dailyEmpWage;
             }
-            echo "Monthly Employee Wage :" . $this->monthlyEmpWage . "\n";
-            echo $this->numOfWorkingDays;
+            echo "$company Monthly Employee Wage :" . $monthlyEmpWage . "\n";
+            //echo $this->numOfWorkingDays;
         }
     }
 
     //Object
     $empWage = new EmployeeWage();
-    $empWage->calculateMonthlyWage();
+    $empWage->calculateMonthlyWage("Reliance", 50, 25, 150);
+    $empWage->calculateMonthlyWage("Dmart", 30, 20, 100);
 ?>
