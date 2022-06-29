@@ -4,7 +4,7 @@
         public $wagePerHour = 20;
         public $empHours;
         public $workingDaysPerMonth = 20;
-        public $numOfWorkingDays = 1;
+        public $numOfWorkingDays = 0;
         public $maxWorkingHours = 100;
         public $totalEmpHours = 0;
         public $monthlyEmpWage = 0;
@@ -34,7 +34,8 @@
                 $dailyEmpWage = $this->wagePerHour * $this->empHours;
                 $this->monthlyEmpWage +=$dailyEmpWage;
             }
-            echo "Monthly Employee Wage :" . $this->monthlyEmpWage;
+            echo "Monthly Employee Wage :" . $this->monthlyEmpWage . "\n";
+            echo $this->numOfWorkingDays;
         }
     }
 
