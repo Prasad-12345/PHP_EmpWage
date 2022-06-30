@@ -1,11 +1,14 @@
 <?php
 /*
-*Compute Employee wage for multiole companies
+*Compute Employee wage for multiple companies
 *Use function parematers instead of class variables
 */
     class EmployeeWage{
         //Variables
         public $empHours;
+        public $isFullTime = 1;
+        public $isPartTime = 2;
+        public $isAbsent = 0;
 
         //To calculate wage for a month
         public function calculateMonthlyWage($company, $wagePerHour, $workingDaysPerMonth, $maxWorkingHours){
@@ -15,19 +18,17 @@
             while($numOfWorkingDays <= $workingDaysPerMonth && $totalEmpHours <= $maxWorkingHours){
                 $num = rand(0,2); //Generating random numbers 0 and 2
                 //Condition to get empHours i.e part time, full time or absent
-                switch($num){
-                    case 1:
+                switch($num){ 
+                    case $this->isFullTime:
                         $this->empHours = 8;
                         break;
 
-                    case 2:
+                    case $this->isPartTime:
                         $this->empHours = 4;
                         break;
 
                     default:
-                        //echo "Employee is absent \n";
                         $this->empHours = 0;
-                        break;
                 }
                 $numOfWorkingDays++;
                 $totalEmpHours += $this->empHours;
