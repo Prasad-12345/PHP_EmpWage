@@ -1,33 +1,13 @@
 <?php
     class EmployeeWage{
         //Variables
-        public $wagePerHour;
         public $empHours;
-        public $workingDaysPerMonth;
-        public $maxWorkingHours;
         public $isFullTime = 1;
         public $isPartTime = 2;
-        public $company;
-        public $num;
 
-        public function __construct($company, $wagePerHour, $workingDaysPerMonth, $maxWorkingHours)
-        {
-            $this->company = $company;
-            $this->wagePerHour = $wagePerHour;
-            $this->workingDaysPerMonth = $workingDaysPerMonth;
-            $this->maxWorkingHours = $maxWorkingHours;    
-        }
-
-        //To calculate wage for a month
-        public function calculateMonthlyWage(){
-            $numOfWorkingDays = 0;
-            $totalEmpHours = 0;
-            $monthlyEmpWage = 0;
-            $num = 0;
-            while($numOfWorkingDays <= $this->workingDaysPerMonth && $totalEmpHours <= $this->maxWorkingHours){
-                function randomNum(){
-                    $num = rand(0,2); //Generating random numbers 0 and 2
-                }
+        //To get employee full time and part time hours
+        public function getEmpHours(){
+                $num = rand(0,2); //Generating random numbers 0 and 2
                 
                 //Condition to get empHours i.e part time, full time or absent
                 switch($num){
@@ -44,19 +24,19 @@
                         $this->empHours = 0;
                         break;
                 }
-                $numOfWorkingDays++;
-                $totalEmpHours += $this->empHours;
-                //Calculate Daily Employee Wage
-                $dailyEmpWage = $this->wagePerHour * $this->empHours;
-                $monthlyEmpWage +=$dailyEmpWage;
+                return $this->empHours;
             }
-            return $this->company . " "  . "Monthly Employee Wage :" . $monthlyEmpWage . "\n";
-            
-            //echo $this->numOfWorkingDays;
         }
-    }
+    
 
-    class childEmpWage extends EmployeeWage{
+    class EmpWageBuilder extends EmployeeWage{
+        //Variables
+        public $wagePerHour;
+        public $workingDaysPerMonth;
+        public $maxWorkingHours;
+        public $company;
+
+        //Constructor
         public function __construct($company, $wagePerHour, $workingDaysPerMonth, $maxWorkingHours)
         {
             $this->company = $company;
@@ -64,11 +44,31 @@
             $this->workingDaysPerMonth = $workingDaysPerMonth;
             $this->maxWorkingHours = $maxWorkingHours;    
         }
+
+        //Function to calculate monthly wage of employee
+        public function calculateMonthlyWage(){
+            $numOfWorkingDays = 0;
+            $totalEmpHours = 0;
+            $monthlyEmpWage = 0;
+            $obj = new EmployeeWage();
+
+            //Calculate wage till condition of working days per month or maximum working hours reached
+            while($numOfWorkingDays <= $this->workingDaysPerMonth && $totalEmpHours <= $this->maxWorkingHours){
+                $empHours = $obj->getEmpHours();
+                $totalEmpHours += $empHours;
+                $numOfWorkingDays++;
+                $dailyEmpWage = $this->wagePerHour * $empHours;
+                $monthlyEmpWage += $dailyEmpWage;
+            }
+            echo $this->company . " "  . "Monthly Employee Wage :" . $monthlyEmpWage . "\n";
+        }
     }
 
     //Object
-    $empWage = new childEmpWage("Reliance", 50, 20, 120);
+    $empWage = new EmpWageBuilder("Reliance", 50, 20, 120);
     $empWage->calculateMonthlyWage();
-    $empWage1 = new childEmpWage("Dmart", 40, 25, 150);
-    $empWage->calculateMonthlyWage();
+    $empWage1 = new EmpWageBuilder("Dmart", 40, 25, 150);
+    $empWage1->calculateMonthlyWage();
+    $empWage2 = new EmpWageBuilder("TCS", 60, 22, 140);
+    $empWage2->calculateMonthlyWage();
 ?>
