@@ -1,4 +1,7 @@
 <?php
+/*
+*Ability to save the employee wage for multiple companies
+*/
     class EmployeeWage{
         //Variables
         public $empHours;
