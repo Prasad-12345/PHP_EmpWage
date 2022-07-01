@@ -1,6 +1,6 @@
 <?php
 /*
-*Ability to save the employee wage for multiple companies
+*Ability to manage employee wage for multiple companies
 */
     class EmployeeWage{
         //Variables
@@ -31,7 +31,6 @@
             }
         }
     
-
     class EmpWageBuilder extends EmployeeWage{
         //Variables
         public $wagePerHour;
@@ -68,10 +67,11 @@
     }
 
     //Object
-    $empWage = new EmpWageBuilder("Reliance", 50, 20, 120);
-    $empWage->calculateMonthlyWage();
-    $empWage1 = new EmpWageBuilder("Dmart", 40, 25, 150);
-    $empWage1->calculateMonthlyWage();
-    $empWage2 = new EmpWageBuilder("TCS", 60, 22, 140);
-    $empWage2->calculateMonthlyWage();
+    $company1 = new EmpWageBuilder("Reliance", 50, 20, 120);
+    $company2 = new EmpWageBuilder("Dmart", 40, 25, 150);
+    $company3 = new EmpWageBuilder("TCS", 60, 22, 140);
+    $companyArray = [$company1, $company2, $company3];
+    for($i = 0; $i < count($companyArray); $i++){
+        echo $companyArray[$i]->calculateMonthlyWage();
+    }
 ?>
