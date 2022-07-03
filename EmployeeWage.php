@@ -1,6 +1,6 @@
 <?php
 /*
-*Ability to manage employee wage for multiple companies using interface approach
+*Store daily wage along with total wage
 */
 
     include "InterfaceEmpWage.php";
@@ -14,6 +14,7 @@
         public $workingDaysPerMonth;
         public $maxWorkingHours;
         public $company;
+        public $index = 0;
 
         //Constructor
         public function __construct($company, $wagePerHour, $workingDaysPerMonth, $maxWorkingHours)
@@ -55,12 +56,15 @@
             //Calculate wage till condition of working days per month or maximum working hours reached
             while($numOfWorkingDays <= $this->workingDaysPerMonth && $totalEmpHours <= $this->maxWorkingHours){
                 $empHours = $this->getEmpHours();
+                $dailyEmpWage = $this->wagePerHour * $empHours;
+                $dailyWageArray[$this->index] = array($this->company => $dailyEmpWage);
+                $this->index++;
+                $monthlyEmpWage += $dailyEmpWage;
                 $totalEmpHours += $empHours;
                 $numOfWorkingDays++;
-                $dailyEmpWage = $this->wagePerHour * $empHours;
-                $monthlyEmpWage += $dailyEmpWage;
             }
-            echo $this->company . " "  . "Monthly Employee Wage :" . $monthlyEmpWage . "\n";
+            print_r($dailyWageArray);
+            return $this->company . " "  . "Monthly Employee Wage :" . $monthlyEmpWage . "\n";
         }
         }
 
